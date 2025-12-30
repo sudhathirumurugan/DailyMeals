@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - arieoMeals</title>
+    <%= stylesheet_link_tag "Feedback", media: "all" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+<div class="mobile-navbar">
+<button class="menu-toggle">
+        <i class="fas fa-bars"></i> 
+</button>
+<%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+    <i class="fas fa-sign-out-alt"></i>
+<% end %>
+</div>
+    <div class="container">
+        <div>
+            <%= render 'shared/employee/sidebar' %>
+        </div>
+        <div id="flash-popup" class="flash-popup" style="display: none;">
+            <span id="flash-message"></span>
+        </div>
+        
+        <div class="main-content">
+            <h2>Your feedback matters</h2>
+            <hr class="header-divider">
+
+            <div id="flash-popup" class="flash-popup" style="display: none;">
+                <span id="flash-message"></span>
+            </div>
+
+            <p class="notice" style="color: green;"><%= notice %></p>
+            <p class="alert" style="color: red;"><%= alert %></p>
+            
+            <div class="feedback-container">
+                <div class="feedback-header">
+                    <span>Give your feedback</span>
+                    <span class="feedback-date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+                </div>
+
+                <%= form_with model: @feedback, url: employee_feedbacks_path, method: :post, local: true do |f| %>
+                   <div class="rating-section">
+                        <div class="rating-item">
+                        <%= f.label :rating_for_snack, "Snack Rating", class: "rating-label" %>
+
+                        <div class="stars <%= 'disabled' unless @daily_meal_record&.snack %>" 
+                            data-field="<%= "#{f.object_name}_rating_for_snack" %>">
+                            <% (1..5).each do |i| %>
+                                <span class="star" data-value="<%= i %>">&#9734;</span>
+                            <% end %>
+                        </div>
+
+                        <%= f.hidden_field :rating_for_snack, id: "#{f.object_name}_rating_for_snack", 
+                            value: f.object.rating_for_snack || 0, disabled: !@daily_meal_record&.snack %>
+                        </div>
+
+                        <div class="rating-item">
+                        <%= f.label :rating_for_dinner, "Dinner Rating", class: "rating-label" %>
+
+                        <div class="stars <%= 'disabled' unless @daily_meal_record&.dinner %>" 
+                            data-field="<%= "#{f.object_name}_rating_for_dinner" %>">
+                            <% (1..5).each do |i| %>
+                                <span class="star" data-value="<%= i %>">&#9734;</span>
+                            <% end %>
+                        </div>
+
+                        <%= f.hidden_field :rating_for_dinner, id: "#{f.object_name}_rating_for_dinner", 
+                            value: f.object.rating_for_dinner || 0, disabled: !@daily_meal_record&.dinner %>
+                        </div>
+                        </div>
+                        
+                        <div class="comment-section">
+                            <%= f.label :comments_for_dinner, "Your comments" %>
+                            <%= f.text_area :comments_for_dinner, placeholder: "Enter your comments", 
+                            disabled: (!@daily_meal_record&.snack && !@daily_meal_record&.dinner) %>
+                        </div>               
+
+                        <div class="submit-btn-wrapper">
+                            <%= f.submit "Submit", class: "submit-btn", id: "submit-feedback", disabled: (!@daily_meal_record.snack && !@daily_meal_record.dinner) %>
+                        </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function initializeRating() {
+        document.querySelectorAll(".stars").forEach(container => {
+            if (container.classList.contains("disabled")) return; // Skip disabled ratings
+            
+            let stars = container.querySelectorAll(".star");
+            let hiddenInput = document.getElementById(container.dataset.field);
+            
+            if (!hiddenInput) return; // Prevent errors if input is missing
+
+            stars.forEach((star, index) => {
+                star.addEventListener("click", () => {
+                    if (container.classList.contains("disabled")) return;
+                    let newRating = index + 1;
+                    hiddenInput.value = newRating;
+                    updateStars(stars, newRating);
+                    checkCommentsEnable();
+                    checkSubmitEnable();
+                });
+
+                star.addEventListener("mouseover", () => {
+                    if (!container.classList.contains("disabled")) {
+                        updateStars(stars, index + 1);
+                    }
+                });
+
+                container.addEventListener("mouseleave", () => {
+                    updateStars(stars, parseFloat(hiddenInput.value) || 0);
+                });
+            });
+
+            let savedRating = parseFloat(hiddenInput.value);
+            if (!isNaN(savedRating) && savedRating > 0) {
+                updateStars(stars, savedRating);
+                checkCommentsEnable();
+                checkSubmitEnable();
+            }
+        });
+    }
+
+    function updateStars(stars, rating) {
+        stars.forEach((star, i) => {
+            if (i + 1 <= rating) {
+                star.innerHTML = "&#9733;"; // Filled star
+                star.classList.add("checked");
+            } else {
+                star.innerHTML = "&#9734;"; // Empty star
+                star.classList.remove("checked");
+            }
+        });
+    }
+
+    function checkCommentsEnable() {
+        let snackRating = parseFloat(document.getElementById("feedback_rating_for_snack")?.value || 0);
+        let dinnerRating = parseFloat(document.getElementById("feedback_rating_for_dinner")?.value || 0);
+        let commentsField = document.querySelector("[name='feedback[comments_for_dinner]']");
+
+        if (commentsField) {
+            if (snackRating > 0 || dinnerRating > 0) {
+                commentsField.removeAttribute("disabled");
+            } else {
+                commentsField.setAttribute("disabled", "disabled");
+            }
+        }
+    }
+
+    function checkSubmitEnable() {
+        let snackRating = parseFloat(document.getElementById("feedback_rating_for_snack")?.value || 0);
+        let dinnerRating = parseFloat(document.getElementById("feedback_rating_for_dinner")?.value || 0);
+        let commentsField = document.querySelector("[name='feedback[comments_for_dinner]']");
+        let submitButton = document.getElementById("submit-feedback");
+
+        if (submitButton) {
+            if (snackRating > 0 || dinnerRating > 0 || (commentsField && commentsField.value.trim().length > 0)) {
+                submitButton.removeAttribute("disabled");
+            } else {
+                submitButton.setAttribute("disabled", "disabled");
+            }
+        }
+    }
+
+    // Attach event listener for comments field
+    document.querySelector("[name='feedback[comments_for_dinner]']")?.addEventListener("input", checkSubmitEnable);
+
+    // Initialize functions
+    initializeRating();
+    checkCommentsEnable();
+    checkSubmitEnable();
+
+    // Sidebar toggle functionality
+    const menuToggle = document.querySelector(".menu-toggle");
+    const closeBtn = document.querySelector(".close-btn");
+    const sidebar = document.querySelector(".sidebar");
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+    }
+
+    if (closeBtn && sidebar) {
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
+    }
+});
+
+</script>
+</html>
+
+

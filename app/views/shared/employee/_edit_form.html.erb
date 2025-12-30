@@ -1,0 +1,39 @@
+<%= form_with model: daily_meal_record, url: employee_daily_meal_record_path(daily_meal_record), method: :patch, local: true, id: "meal-form" do |f| %>
+    <div class="meal-container">
+        <div class="meal-selection">
+            <div class="meal-item">
+                <%= f.label :snack, "Snack" %>
+                <%= f.select :snack, options_for_select([["Select", nil], ["Yes", true], ["No", false]], daily_meal_record.snack), {}, { class: "form-control" } %>
+            </div>
+            <div class="meal-item">
+                <%= f.label :dinner, "Dinner" %>
+                <%= f.select :dinner, options_for_select([["Select", nil], ["Yes", true], ["No", false]], daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
+            </div>
+
+            <!-- Chapati Count - Initially Hidden -->
+            <div class="meal-item-chapati-count" id="chapati-container">
+                <%= f.label :chapati_count, "Number of Chapatis" %>
+                <%= f.select :chapati_count, options_for_select([["Select", nil], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control", disabled: true } %>
+            </div>
+        </div>
+
+        <div>
+        <!-- Veg/Non-Veg options (if enabled) -->
+        <% if @meal_preference_enabled %>
+            <div class="meal-item-meal-type">
+                <%= f.label :meal_type, "Meal Type" %>
+                <%= f.select :meal_type, [["Not-Specified", 0], ['Veg', 1], ['Non-Veg', 2]], { class: "form-control" } %>
+            </div>
+        <% else %>
+            <!-- If veg/non-veg is disabled, set meal_type to 0 (veg) -->
+            <%= f.hidden_field :meal_type, value: 0 %>
+        <% end %>
+        </div>
+        
+        <!-- Update Button Inside the Form -->
+        <div class="update-btn-wrapper">
+            <%= link_to "Cancel", employee_daily_meal_record_path(@daily_meal_record), class: "cancel-btn" %>
+            <%= f.submit "Update", class: "update-btn" %>
+        </div>
+    </div>
+<% end %>

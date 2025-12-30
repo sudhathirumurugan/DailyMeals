@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Arieo Meal" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= javascript_importmap_tags %>
+    
+    
+  </head>
+
+  <body>
+    <%= yield %>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const errorPopup = document.getElementById("error-popup");
+
+        if (errorPopup && errorPopup.innerText.trim() !== "") {
+          errorPopup.style.display = "block";
+          errorPopup.style.opacity = "1";
+          errorPopup.style.backgroundColor = "maroon"; 
+
+        setTimeout(function () {
+          let fadeEffect = setInterval(function () {
+            if (!errorPopup.style.opacity) {
+              errorPopup.style.opacity = "1";
+              errorPopup.style.backgroundColor = "maroon"; 
+            }
+            if (errorPopup.style.opacity > "0") {
+              errorPopup.style.opacity -= "0.1";
+              errorPopup.style.backgroundColor = "maroon"; 
+            } else {
+              clearInterval(fadeEffect);
+              errorPopup.style.display = "none";
+            }
+          }, 100); 
+        }, 4000); 
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const flashPopup = document.getElementById("flash-popup");
+        const flashMessage = document.getElementById("flash-message");
+
+        // Get flash messages from Rails
+        let noticeMessage = "<%= j flash[:notice] %>";
+        let alertMessage = "<%= j flash[:alert] %>";
+        let errorMessage = "<%= j flash[:error] %>";
+
+        if (noticeMessage) {
+          flashMessage.textContent = noticeMessage;
+          flashPopup.style.backgroundColor = "green"; // Green for success
+        } else if (alertMessage) {
+          flashMessage.textContent = alertMessage;
+          flashPopup.style.backgroundColor = "maroon"; // Red for error
+        } else if (errorMessage) {
+          flashMessage.textContent = alertMessage;
+          flashPopup.style.backgroundColor = "red"; // Red for error
+        } else {
+          return;
+        }
+
+        flashPopup.style.display = "block";
+        flashPopup.style.opacity = "1"; // Ensure it's fully visible
+
+        // Auto-hide the popup with fade-out effect
+        setTimeout(function () {
+          let fadeEffect = setInterval(function () {
+            if (!flashPopup.style.opacity) {
+              flashPopup.style.opacity = "1";
+            }
+            if (flashPopup.style.opacity > "0") {
+              flashPopup.style.opacity -= "0.1";
+            } else {
+              clearInterval(fadeEffect);
+              flashPopup.style.display = "none";
+            }
+          }, 100); // Fades out over 1 second (100ms * 10 steps)
+        }, 2000); // Waits 3 seconds before starting fade-out
+      });
+  </script>
+  </body>
+</html>
+

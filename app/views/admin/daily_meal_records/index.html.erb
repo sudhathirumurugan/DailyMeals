@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meals Records</title>
+    
+    <%= stylesheet_link_tag "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+    <!-- Flatpickr CSS -->
+<%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" %>
+
+<!-- Flatpickr JS -->
+<%= javascript_include_tag "https://cdn.jsdelivr.net/npm/flatpickr" %>
+
+    <%= stylesheet_link_tag "admin_daily_meal_records" %>
+</head>
+<body>
+    <div class="mobile-navbar">
+        <button class="menu-toggle">
+                <i class="fas fa-bars"></i> 
+        </button>
+        <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+            <i class="fas fa-sign-out-alt"></i>
+        <% end %>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <%= render 'shared/admin/sidebar' %>
+
+        <main class="main-content">
+          <div id="flash-popup" class="flash-popup" style="display: none;">
+            <span id="flash-message"></span>
+          </div>
+            <header class="header">
+            
+                <h2>Daily Meals Records</h2>
+
+                <div>
+                <select id="meal-filter" class="meal-filter">
+                            <option value="default">All</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="dinner">Dinner</option>
+                        </select>
+                </div>
+                
+                <div class="date">
+                <%= form_with url: admin_daily_meal_records_path, method: :get, class: "date-form", local: true do |f| %>
+                    <label for="datePicker" id="datePickerIcon" class="calendar-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </label>
+                    
+                        <span class="selected-date"><%= @date.strftime("%B %d, %A %Y") %></span>
+                        <%= f.date_field :date, value: @date, onchange: "this.form.submit();", class: "date-picker hidden", id: "datePicker" %>                    <% end %>
+                </div>
+            </header>
+
+            <% if @meal_records.empty? %>
+            <hr class="header-divider">
+            <div class="no-records">
+                <p>No Meal Records found for this date: <%= @date.strftime("%B %d, %A %Y") %></p>
+            </div>
+                <% else %>
+                    <hr class="header-divider">
+                    <div class="table-container">
+                    
+                        <div id="default-table">
+                            <table id="mealRecordsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Snacks</th>
+                                        <th>Dinner</th>
+                                        <th>Roti for Dinner</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% @meal_records.each do |record| %>
+                                        <tr>
+                                            <td><%= record.user.name %></td>
+                                            <td><%= record.snack ? "Yes" : "No" %></td>
+                                            <td><%= record.dinner ? "Yes" : "No" %></td>
+                                            <td><%= record.chapati_count %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Snacks Table -->
+                        <div id="snacks-table" class="hidden">
+                            <table id="snacksTable">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% @meal_records.select { |record| record.snack }.each_with_index do |record, index| %>
+                                        <tr>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= record.user.name %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                <!-- Dinner Table -->
+                <div id="dinner-table" class="hidden">
+                    <table id="dinnerTable">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Name</th>
+                                <th>Chapati Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @meal_records.select { |record| record.dinner }.each_with_index do |record, index| %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= record.user.name %></td>
+                                    <td><%= record.chapati_count %></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="meal-counts">
+                <h3>Meal Count</h3>
+                <% if !@meal_preference_enabled %>
+                    <div class="meal-summary">
+                        <span><strong>Snacks:</strong> <%= @snack_count %></span>
+                        <span><strong>Dinner:</strong> <%= @dinner_count %></span>
+                        <span><strong>Chapati Count:</strong> <%= @total_chapati_count %></span>
+                    </div>
+                <% else %>
+                    <h3>Veg</h3>
+                    <div class="meal-summary">
+                        <span><strong>Snacks:</strong> <%= @veg_snack_count %></span>
+                        <span><strong>Dinner:</strong> <%= @veg_dinner_count %></span>
+                        
+                    </div>
+            
+                    <h3>Non-Veg</h3>
+                    <div class="meal-summary">
+                        <span><strong>Snacks:</strong> <%= @non_veg_snack_count %></span>
+                        <span><strong>Dinner:</strong> <%= @non_veg_dinner_count %></span>
+                        <span><strong>Total Chapati Count:</strong> <%= @total_chapati_count %></span>
+                    </div>
+                <% end %>
+            </div>
+            </div>
+            <% end %>
+
+            <%= link_to download_csv_admin_daily_meal_records_path(format: :csv), class: "download-btn", tabindex: -1, onclick: "return true;" do %>
+                <i class="fas fa-download"></i> Download
+            <% end %>
+        </main>
+    </div>
+
+    <!-- Include DataTables JS -->
+    <%= javascript_include_tag "https://code.jquery.com/jquery-3.6.0.min.js" %>
+    <%= javascript_include_tag "https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" %>
+
+    <!-- JavaScript to Toggle Tables -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let mealFilter = document.getElementById("meal-filter");
+        let defaultTable = document.getElementById("default-table");
+        let snacksTable = document.getElementById("snacks-table");
+        let dinnerTable = document.getElementById("dinner-table");
+    
+        mealFilter.addEventListener("change", function () {
+            let value = this.value;
+            defaultTable.style.display = value === "default" ? "block" : "none";
+            snacksTable.style.display = value === "snacks" ? "block" : "none";
+            dinnerTable.style.display = value === "dinner" ? "block" : "none";
+        });
+    });
+    
+    // Initialize DataTable for all tables
+    $(document).ready(function() {
+        $('#mealRecordsTable').DataTable({
+            paging: true, 
+            searching: false,       
+            ordering: false,        
+            info: true,            
+            lengthChange: false,    
+            pageLength: 7          
+        });
+    
+        $('#snacksTable').DataTable({
+            paging: true, 
+            searching: false,       
+            ordering: false,        
+            info: true,            
+            lengthChange: false,    
+            pageLength: 7          
+        });
+    
+        $('#dinnerTable').DataTable({
+            paging: true, 
+            searching: false,       
+            ordering: false,        
+            info: true,            
+            lengthChange: false,    
+            pageLength: 7
+        });
+    
+        const menuToggle = document.querySelector(".menu-toggle");
+        const closeBtn = document.querySelector(".close-btn");
+        const sidebar = document.querySelector(".sidebar");
+    
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active"); 
+            });
+        }
+    
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener("click", function () {
+                sidebar.classList.remove("active"); 
+            });
+        }
+    });
+    
+    </script>
+
+    <!--For Download button enable & disable Functionality -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Check if there are meal records
+      let mealRecordsCount = <%= @meal_records.present? ? @meal_records.count : 0 %>;
+  
+      // Get the download button
+      let downloadBtn = document.getElementById("download-btn");
+  
+      if (mealRecordsCount > 0) {
+        // Enable button if meal records exist
+        downloadBtn.removeAttribute("disabled");
+      } 
+    });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let datePicker = document.getElementById("datePicker");
+    let datePickerIcon = document.getElementById("datePickerIcon");
+
+    if (datePicker && datePickerIcon) {
+      let calendar = flatpickr(datePicker, {
+        allowInput: true,
+        dateFormat: "Y-m-d",
+        defaultDate: datePicker.value || new Date(),
+        disableMobile: true,
+        maxDate: "today",
+        appendTo: document.body, // Ensure calendar is positioned properly
+        onOpen: function (selectedDates, dateStr, instance) {
+          if (instance.calendarContainer) {
+            let calendarContainer = instance.calendarContainer;
+            calendarContainer.style.transform = "scale(1)";
+            calendarContainer.style.transformOrigin = "top right"; // Adjust position
+          }
+        }
+      });
+
+      datePickerIcon.addEventListener("click", function (event) {
+        event.preventDefault(); 
+        datePicker.focus(); 
+        calendar.open();
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

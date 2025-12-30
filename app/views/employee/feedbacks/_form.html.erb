@@ -1,0 +1,50 @@
+
+<div class="main-content">
+<h2>Your feedback matters</h2>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+<div class="feedback-container">
+    <div class="feedback-header">
+        <span>Give your feedback</span>
+        <span class="feedback-date"><%= Date.today.strftime("%B %d, %A %Y") %></span>
+    </div>
+
+    <%= form_with model: @feedback, url: employee_feedbacks_path, method: :post, local: true do |f| %>
+        <div class="rating-section">
+            <div class="rating-item">
+                <%= f.label :rating_for_snack, "Snack Rating", class: "rating-label" %>
+            
+                <div class="stars" data-field="<%= "#{f.object_name}_rating_for_snack" %>">
+                    <% (1..5).each do |i| %>
+                        <span class="star" data-value="<%= i %>">&#9734;</span>
+                    <% end %>
+                </div>
+            
+                <!-- Hidden field to store the float rating -->
+                <%= f.hidden_field :rating_for_snack, id: "#{f.object_name}_rating_for_snack", value: f.object.rating_for_snack || 0 %>
+            </div>
+      
+            <div class="rating-item">
+                    <%= f.label :rating_for_dinner, "Dinner Rating", class: "rating-label" %>
+                
+                    <div class="stars" data-field="<%= "#{f.object_name}_rating_for_dinner" %>">
+                        <% (1..5).each do |i| %>
+                            <span class="star" data-value="<%= i %>">&#9734;</span>
+                        <% end %>
+                    </div>
+                
+                    <%= f.hidden_field :rating_for_dinner, id: "#{f.object_name}_rating_for_dinner", value: f.object.rating_for_dinner || 0 %>
+            </div>
+            
+        </div>
+
+            <div class="comment-section">
+                <%= f.label :comments_for_dinner, "Your comments" %>
+                <%= f.text_area :comments_for_dinner, placeholder: "Enter your comments" %>
+            </div>                 
+
+            <div class="submit-btn-wrapper">
+                <%= f.submit "Submit", class: "submit-btn" %>
+            </div>
+    <% end %>
+</div>

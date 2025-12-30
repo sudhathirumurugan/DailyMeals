@@ -1,0 +1,20 @@
+<%= turbo_stream_from "flash_messages" %>
+
+<div id="flash-container">
+  <% flash.each do |type, message| %>
+    <div id="flash-message" class="flash-message <%= type %>">
+      <p><%= message %></p>
+    </div>
+    
+    <%= turbo_stream.append "flash-container" do %>
+      <template>
+        <script>
+          setTimeout(() => {
+            document.getElementById("flash-message")?.classList.add("fade-out");
+            setTimeout(() => document.getElementById("flash-message")?.remove(), 1000);
+          }, 3000);
+        </script>
+      </template>
+    <% end %>
+  <% end %>
+</div>

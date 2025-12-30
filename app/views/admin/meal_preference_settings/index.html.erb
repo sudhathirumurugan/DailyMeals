@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <%= stylesheet_link_tag "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <%= stylesheet_link_tag "admin_meal_preference_setting" %>
+</head>
+<body>
+
+    <!-- Mobile Navbar -->
+    <div class="mobile-navbar">
+        <button class="menu-toggle">
+            <i class="fas fa-bars"></i> 
+        </button>
+        <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+            <i class="fas fa-sign-out-alt"></i>
+        <% end %>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <%= render 'shared/admin/sidebar' %>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2>Settings</h2>
+                <span class="selected-date"><%= @date.strftime("%B %d, %A %Y") %></span>
+                
+            </div>
+            <hr class="header-divider">
+
+            <!-- Form -->
+            <%= form_with(model: @meal_preference_setting, url: admin_meal_preference_settings_path, method: :post) do |form| %>
+                
+              <div class="space"></div>
+                <!-- Select Date Field -->
+                <div class="form-group-select-date">
+                    <%= form.label :date, "Select Date" %>
+                    <%= form.date_field :date, value: @date, class: "form-control date-picker", id: "flatpickr-datepicker" %>
+                    <label for="datePicker" id="datePickerIcon" class="calendar-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </label>
+                </div>
+
+                
+
+                <!-- Meal Preferences -->
+                <div class="form-group">
+                    <%= form.label :enabled, "Meal Preferences" %><br>
+                    <div class="form-check form-check-inline">
+                        <%= form.radio_button :enabled, true, class: "form-check-input" %>
+                        <%= form.label :enabled_enabled, "Enable", class: "form-check-label" %>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <%= form.radio_button :enabled, false, class: "form-check-input" %>
+                        <%= form.label :enabled_disabled, "Disable", class: "form-check-label" %>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <%= form.submit "Save Settings", class: "save-settings-btn" %>
+            <% end %>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Initialize Flatpickr
+    const datePicker = flatpickr(".form-control.date-picker", {
+        enableTime: false,  // Disable time selection
+        dateFormat: "Y-m-d",  // Format as YYYY-MM-DD
+        minDate: "today",  // Prevent past dates
+        defaultDate: new Date(),  // Set default date to today
+        disableMobile: true 
+    });
+
+    // Open Flatpickr when clicking the calendar icon
+    const calendarIcon = document.querySelector(".calendar-icon");
+    if (calendarIcon) {
+        calendarIcon.addEventListener("click", function () {
+            datePicker.open();
+        });
+    }
+});
+
+  
+    </script>
+</body>
+</html>

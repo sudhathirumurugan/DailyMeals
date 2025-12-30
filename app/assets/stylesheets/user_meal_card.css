@@ -1,0 +1,509 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    overflow: hidden; /* Removes scroll */
+}
+
+/* General Styles */
+.container {
+    display: flex;
+    margin: auto;
+}
+
+.meal-card {
+    flex-grow: 1;
+    padding: 20px;
+    padding-top: 30px;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh; /* Ensures full height without affecting layout */
+}
+
+.meal-card h2{
+    align-self: flex-start;
+    padding-bottom: 17px;
+}
+
+.first-p{
+    align-self: flex-start;
+    padding-bottom: 20px;
+}
+
+/* Meal Card Grid Layout */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; /* Even spacing */
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Individual card styling */
+.card {
+    width: 500px; /* Adjust width for two per row */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+    align-self: flex-start;
+
+}
+
+
+/* Adjusting text in cards */
+.card p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.card p strong {
+    color: #000000;
+}
+
+.card p:nth-child(2) {
+    color: rgb(0, 0, 0);
+}
+
+.card p:nth-child(3) {
+    color: rgb(0, 0, 0);
+}
+
+/* Buttons */
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.card-buttons .btn {
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .card {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .card-buttons {
+        flex-direction: column;
+    }
+
+    .card-buttons .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+.sidebar {
+    width: 300px;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* sidebar-divider */
+.sidebar-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #ccc 50%, transparent); 
+    margin: 10px 0;
+}
+
+/* Sidebar Logo */
+.sidebar .logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Sidebar buttons */
+.nav-btn {
+    display: block; /* Make list items behave like block buttons */
+    margin: 10px 0;
+    overflow: hidden;
+    background-color: black; /* Bootstrap primary color */
+    transition: background 0.3s ease;
+  }
+  
+  .nav-btn.active {
+    background-color: rgb(194, 85, 6); /* Change to your theme color */
+    color: white;
+    border-radius: 5px;
+}
+
+
+  .nav-btn:hover {
+    background-color: rgb(194, 85, 6); /* Darker shade on hover */
+  }
+  
+  .btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%; /* Makes the link cover the full list item */
+    height: 100%;
+  }
+  
+  .btn-link i {
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  
+
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: orange;
+}
+
+.sidebar nav ul li:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+/* Logout Button */
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+/* edit-btn */
+.edit-btn {
+    background-color: #f04e23 !important;
+    border: none !important;
+    padding: 10px 20px;
+    color: white !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background-color: #d6470e !important;
+    transform: scale(1.05) !important;
+}
+
+/* delete-btn */
+.delete-btn {
+    background-color: #f04e23 !important;
+    border: none !important;
+    padding: 10px 20px;
+    color: white !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #d6470e !important;
+    transform: scale(1.05) !important;
+}
+
+.flash-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Smooth fade-out */
+  }
+
+  .notice, .alert {
+    display: none;
+  }
+
+
+
+/* header-divider */
+.header-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #000000 50%, transparent); 
+    margin: 10px 0;
+    position: relative;
+    z-index: 1; /* Ensures it stays above background but below header content */
+    width: 100%;
+}
+
+.mobile-navbar {
+    display: none;
+}
+
+.close-btn {
+    display: none;
+}
+
+.logout-btn-mobile {
+    display: none;
+}
+
+/* Mobile Screen (up to 768px) */
+@media screen and (max-width: 768px) {
+
+    .mobile-navbar {
+        display: flex; 
+    }
+
+    .logout-btn{
+        display: none;
+    }
+    
+    .sidebar { 
+        position: fixed;
+        left: -250px; 
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 20px;
+    }
+
+    .sidebar.active {
+        left: 0; 
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        color: white;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .brand {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: -30px; 
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .meal-card {
+        flex-grow: 1;
+        padding: 20px;
+        padding-top: 91px;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh; /* Ensures full height without affecting layout */
+    }
+
+    .card p {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+
+    .card-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px; /* Reduce gap for better spacing */
+        align-items: center; /* Center buttons */
+        margin-top: 45px;
+    }
+    .header-divider{
+        display: none;
+    }
+
+    .edit-btn, .delete-btn {
+        width: 250px; 
+        text-align: center;
+        font-size: 20px;
+    }
+}

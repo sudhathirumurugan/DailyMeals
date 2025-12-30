@@ -1,0 +1,864 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f8f8;
+}
+
+
+/* Sidebar */
+.sidebar {
+    width: 300px;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/* sidebar-divider */
+.sidebar-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #ccc 50%, transparent); 
+    margin: 10px 0;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar .logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
+
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: orange;
+}
+
+.sidebar nav ul li:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+/* Sidebar Buttons */
+.nav-btn {
+    display: block;
+    margin: 10px 0;
+    background-color: black;
+    transition: background 0.3s ease;
+}
+
+.nav-btn.active {
+    background-color: rgb(194, 85, 6);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+.btn-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* Logout Button */
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+
+.main-content {
+    margin-left: 300px;
+    flex: 1;
+    padding: 20px;
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+.main-content h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding-bottom: 17px;
+}
+
+.meal-container {
+    border: 3px solid #dbdee0; 
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 920px;
+    height: 400px;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    background: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
+}
+
+.meal-selection {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.meal-item, 
+.meal-item-chapati-count {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Ensure chapati-container is initially hidden */
+#chapati-container {
+    display: none; 
+    visibility: hidden;
+}
+
+/* Make sure it appears correctly when needed */
+#chapati-container.active {
+    display: flex;
+    visibility: visible;
+}
+
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+    font-weight: bold;
+    width: 196px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+select {
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #ff6600;
+    border-radius: 6px;
+    background: #f8f8f8;
+    cursor: pointer;
+    outline: none;
+}
+.meal-container {
+    position: relative; /* Establish positioning context */
+    padding-bottom: 60px; /* Ensure space for button */
+}
+
+.submit-btn-wrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.submit-btn {
+    background-color: #f04e23;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+    background: #e65c00;
+    transform: scale(1.05);
+}
+
+/* form */
+form_with {
+    display: flex;
+    justify-content: center;
+}
+
+/* update-button */
+.update-btn-wrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.update-btn {
+    background-color: #f04e23;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.update-btn:hover {
+    background: #d6470e;
+    transform: scale(1.05);
+}
+
+/* cancel-btn */
+.cancel-btn {
+    background-color: #f04e23 !important;
+    border: none !important;
+    padding: 10px 20px;
+    color: white !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.cancel-btn:hover {
+    background-color: #d6470e !important;
+    transform: scale(1.05) !important;
+}
+
+.flash-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Smooth fade-out */
+  }
+
+  .notice, .alert {
+    display: none;
+  }
+
+  /* meal-type */
+  .meal-item-meal-type {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+/* Style for the meal type dropdown */
+.meal-item-meal-type select {
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #ff6600;
+    border-radius: 6px;
+    background: #f8f8f8;
+    cursor: pointer;
+    outline: none;
+    width: 200px; /* Adjust width as needed */
+}
+
+/* Add focus effect */
+.meal-item-meal-type select:focus {
+    border-color: #e65c00;
+    background-color: #f8f8f8;
+}
+
+/* When meal type is not selected, show red border */
+.meal-item-meal-type select:invalid {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+/* Error message for meal type */
+.meal-item-meal-type .error-message {
+    color: red;
+    font-size: 14px;
+    display: none;
+    margin-top: 5px;
+}
+
+/* Show error message when input is invalid */
+.meal-item-meal-type select:invalid + .error-message {
+    display: block;
+}
+
+/* header-divider */
+.header-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #000000 50%, transparent); 
+    margin: 10px 0;
+    position: relative;
+    z-index: 1; /* Ensures it stays above background but below header content */
+  }
+
+  .welcome-message {
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 15px;
+    background: white; /* Light translucent background */
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-block; 
+}
+
+.mobile-navbar {
+    display: none;
+}
+
+.close-btn {
+    display: none;
+}
+
+.logout-btn-mobile {
+    display: none;
+}
+
+/* Mobile Screen (up to 768px) */
+@media (min-width: 412px) and (max-width: 768px) {
+    .mobile-navbar {
+        display: flex; 
+    }
+    
+    .sidebar { 
+        position: fixed;
+        left: -250px; 
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 20px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0; 
+    }
+
+    .sidebar-divider {
+        border: 0;
+        height: 2px; /* Slightly increased height */
+        background: linear-gradient(to right, transparent, #ffffff 50%, transparent); 
+        margin: 10px 0;
+        margin-bottom: 10px;
+      }
+    
+    .brand {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        color: white;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 37px;
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+    
+    .main-content h2 {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-top: 60px;
+    }
+    
+    .meal-container {
+        width: 372px;
+        height: 650px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .meal-selection {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .meal-item {
+        width: 100%;
+    }
+
+    .meal-item-meal-type{
+        padding-top: 10px;
+        margin-right: 16px;
+    }
+
+    #chapati-container.active{
+        display: flex;
+        visibility: visible;
+        margin-right: 20px;
+    }
+
+    label {
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        display: block;
+    }
+
+    .custom-select {
+        position: relative;
+        width: 316px;
+    }
+    
+    .meal-item-meal-type select {
+        width: 316px;
+        font-size: 20px;
+        font-weight: 400;
+        border: 3px solid #ff6600;
+        border-radius: 10px;
+        background: #fff;
+        margin-right: 5px;
+    }
+
+    .custom-select select {
+        width: 100%; /* Ensures it matches the parent width */
+        padding: 10px;
+        font-size: 20px;
+        border: 2px solid #ff6600;
+        border-radius: 8px;
+        background-color: white;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+    }
+    
+    /* Custom Arrow Icon */
+    .custom-select i {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #ff6600;
+        pointer-events: none;
+    }
+
+    select {
+        width: 316px;  
+        font-size: 20px; 
+        font-weight: 400;
+        border: 3px solid #ff6600;
+        border-radius: 10px;
+        background: #fff;
+        height: 51px;
+    }
+    
+    select option {
+        font-size: 14px; 
+        padding: 5px; 
+    }
+    
+    .submit-btn {
+        position: static;
+        background-color: #e65100; 
+        color: white;
+        font-weight: 700;
+        border-radius: 10px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; 
+        width: 148px;
+        height: 57px;
+    }
+    
+    .submit-btn .icon {
+        font-size: 18px; 
+    }
+
+    .logout-btn{
+        display: none;
+    }
+
+    .header-divider{
+        display: none;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 411px) {
+    .mobile-navbar {
+        display: flex; 
+    }
+    
+    .sidebar {
+        position: fixed;
+        left: -240px;
+        top: 0;
+        width: 240px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 15px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .sidebar-divider {
+        border: 0;
+        height: 2px; /* Slightly increased height */
+        background: linear-gradient(to right, transparent, #ffffff 50%, transparent); 
+        margin: 10px 0;
+        margin-bottom: 10px;
+      }
+
+    .brand {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        color: white;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 37px;
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+    
+    .main-content h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 45px;
+        padding-bottom: 5px;
+        margin-bottom: 0;
+    }
+    
+    .meal-container {
+        width: 350px;
+        height: 470px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding-top: 0px;
+        margin-top: 5px;
+    }
+
+    .meal-selection {
+        flex-direction: column; 
+        gap: 10px; 
+        width: 100%;
+    }
+
+    .meal-item {
+        width: 100%;
+    }
+
+    .meal-item-meal-type{
+        padding-top: 10px;
+        margin-right: 16px;
+    }
+
+    .meal-item-meal-type select{
+        width: 300px;
+        font-size: 20px;
+        font-weight: 400;
+        border: 3px solid #ff6600;
+        border-radius: 10px;
+        background: #fff;
+    }
+
+    #chapati-container.active{
+        display: flex;
+        visibility: visible;
+        margin-right: 16px;
+    }
+
+    label {
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        display: block;
+    }
+
+    .custom-select {
+        position: relative;
+        width: 316px;
+    }
+    
+    .custom-select select {
+        width: 100%; /* Ensures it matches the parent width */
+        padding: 10px;
+        font-size: 20px;
+        border: 2px solid #ff6600;
+        border-radius: 8px;
+        background-color: white;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+    }
+    
+    /* Custom Arrow Icon */
+    .custom-select i {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #ff6600;
+        pointer-events: none;
+    }
+
+    select {
+        width: 300px;  
+        font-size: 20px; 
+        font-weight: 400;
+        border: 3px solid #ff6600;
+        border-radius: 10px;
+        background: #fff;
+    }
+    
+    select option {
+        font-size: 14px; 
+        padding: 5px; 
+    }
+    
+    .submit-btn {
+        position: static;
+        background-color: #e65100; 
+        color: white;
+        font-weight: 700;
+        border-radius: 10px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; 
+        width: 120px;
+        height: 45px;
+    }
+    
+    .submit-btn .icon {
+        font-size: 18px; 
+    }
+
+    .logout-btn{
+        display: none;
+    }
+
+    .header-divider{
+        display: none;
+    }
+}

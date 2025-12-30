@@ -1,0 +1,83 @@
+<%= stylesheet_link_tag "forget_password", media: "all" %>
+<body style="background: url('<%= asset_path('Food.jpg') %>') no-repeat center center/cover;">
+    <div id="flash-popup" class="flash-popup" style="display: none;">
+        <span id="flash-message"></span>
+    </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+     <div class="reset-password-popup">
+      <p id="emailreset-error"></p>
+    </div>
+
+    <div class="wrapper">
+        <div class="glass-box"></div>
+            <div class="container">
+            
+            <div class="left-box">
+                <h2 class="brand">arieoMeals</h2>
+                <%= image_tag "chef.png", alt: "arieoMeals img", class: "transparent-img" %>
+            </div>
+            <div class="reset-box">
+                <h2>Reset Password</h2>
+                <%= render "users/shared/error_messages", resource: resource %>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, id: "reset-password-form" }) do |f| %>
+                    <label for="email">Email</label>
+                <%= f.email_field :email, id: "email", placeholder: "Enter your email", autofocus: true, required: true, minlength: 6, maxlength: 30, autocomplete: "email" %>
+
+                <button type="submit" class="btn">Send Reset Instructions</button>
+                <button type="button" class="btn" onclick="window.location.href='<%= new_user_session_path %>'">Back to Login</button>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const form2 = document.querySelector("#reset-password-form");
+          if (!form2) return;
+
+          const emailInput2 = document.querySelector("#email");
+          const emailError2 = document.querySelector("#emailreset-error");
+          const resetPasswordPopup = document.querySelector(".reset-password-popup");
+
+          form2.addEventListener("submit", function (event) {
+          let isValid = true;
+          resetPasswordPopup.style.display = "none"; 
+          resetPasswordPopup.style.opacity = "0"; 
+
+          const emailPattern2 = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+          if (!emailPattern2.test(emailInput2.value)) {
+            emailError2.textContent = "Please enter a valid Gmail address.";
+            isValid = false;
+          } else {
+            emailError2.textContent = "";
+          }
+
+          if (!isValid) {
+            resetPasswordPopup.style.display = "block"; 
+            setTimeout(() => {
+                resetPasswordPopup.style.opacity = "1"; 
+            }, 100);
+
+            setTimeout(() => {
+                let opacityValue = 1.0; 
+                let fadeEffect = setInterval(() => {
+                    if (opacityValue > 0) {
+                        opacityValue -= 0.1; 
+                        resetPasswordPopup.style.opacity = opacityValue.toString();
+                    } else {
+                        clearInterval(fadeEffect);
+                        resetPasswordPopup.style.display = "none"; 
+                    }
+                }, 100);
+            }, 4000); 
+
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+</body>
+  
+</html>

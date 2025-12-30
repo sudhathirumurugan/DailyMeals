@@ -1,0 +1,811 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/* Main Layout */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 300px;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/* sidebar-divider */
+.sidebar-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #ccc 50%, transparent); 
+    margin: 10px 0;
+}
+
+/* Sidebar Logo */
+.sidebar .logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: orange;
+}
+
+.sidebar nav ul li:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+/* Sidebar Buttons */
+.nav-btn {
+    display: block;
+    margin: 10px 0;
+    background-color: black;
+    transition: background 0.3s ease;
+}
+
+.nav-btn.active {
+    background-color: rgb(194, 85, 6);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: rgb(194, 85, 6);
+}
+
+.btn-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 300px;
+    flex-grow: 1;
+    padding: 20px;
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+.main-content h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding-bottom: 17px;
+}
+
+/* Feedback Section */
+.feedback-container {
+    border: 3px solid #dbdee0;
+    border-radius: 10px;
+    padding: 25px;
+    width: 920px;
+    background: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
+    position: relative;
+    margin: 20px auto;
+}
+
+/* Feedback Header */
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* header-divider */
+.header-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #000000 50%, transparent); 
+    margin: 10px 0;
+    position: relative;
+    z-index: 1; /* Ensures it stays above background but below header content */
+}
+
+/* Feedback Date */
+.feedback-date {
+    color: #f04e23;
+    font-size: 16px;
+}
+
+/* Comment Section */
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 10px;
+    align-items: center;
+}
+
+/* Submit Button */
+.submit-btn-wrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.submit-btn {
+    background-color: #f04e23;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+    background: #e65c00;
+    transform: scale(1.05);
+}
+
+/* Textarea */
+.comment-section textarea {
+    width: 450px;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid #ff5722;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+}
+
+/* Rating Section */
+.rating-section {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px 0;
+}
+
+.rating-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Rating Stars */
+.stars {
+    font-size: 30px;
+    color: orange;
+    cursor: pointer;
+    display: flex;
+    gap: 5px;
+}
+
+.stars .star {
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.stars .checked {
+    color: orange;
+}
+
+
+/* PopUp code */
+.flash-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Smooth fade-out */
+  }
+  
+  .notice, .alert {
+    display: none;
+  }
+  .welcome-message {
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 9px;
+    background: white; /* Light translucent background */
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-block; 
+}
+ 
+.mobile-navbar {
+    display: none;
+}
+
+.close-btn {
+    display: none;
+}
+
+.logout-btn-mobile {
+    display: none;
+}
+
+/* Mobile Screen (up to 768px) */
+@media (min-width: 412px) and (max-width: 768px) {
+    .mobile-navbar {
+        display: flex; 
+    }
+
+    .logout-btn {
+        display: none;
+    }
+    
+    .sidebar { 
+        position: fixed;
+        left: -250px; 
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 20px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0; 
+    }
+
+    .sidebar-divider {
+        border: 0;
+        height: 2px; /* Slightly increased height */
+        background: linear-gradient(to right, transparent, #ffffff 50%, transparent); 
+        margin: 10px 0;
+        margin-bottom: 10px;
+      }
+
+    .brand {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: -30px; 
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .feedback-container {
+        position: relative; 
+        margin-top: 12px;  
+        width: 100%; 
+        max-width: 600px; 
+        height: 700px; 
+        padding: 20px;
+        margin-left: -5px;
+    }
+
+    .feedback-header {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center; 
+        text-align: center;
+        margin-bottom: 20px; 
+        margin-right: 150px;
+    }
+    
+    .header-divider{
+        display: none;
+    }
+
+    .feedback-date {
+        text-align: right;
+        width: 230px;
+        color: #f04e23;
+        margin-bottom: 20px;
+        font-size: 18px;
+        margin-left: 275px;
+    }
+    
+    .feedback-title {
+        width: 100%;
+        text-align: left;
+        font-size: 25px;
+    }
+    
+    .main-content {
+        padding: 50px;
+        padding-right: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+    .main-content h2 {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 45px;
+        padding-bottom: 5px;
+        margin-bottom: 0;
+    }
+
+    .rating-section {
+        flex-direction: column; 
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .rating-snacks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 50px;
+        align-items: baseline;
+    }
+
+    /* demo */
+    
+    .feedback-header span:first-child {
+        font-size: 24px;
+        width: 250px;
+        margin-left: 15px;
+    }
+
+    .feedback-header .feedback-date {
+        font-size: 19px;
+    }
+
+    span.star {
+        font-size: 28px;
+        padding-left: 15px; /* Reduce padding for better fit */
+    }
+
+    .stars .star {
+        font-size: 45px; /* Reduce star size for better mobile layout */
+    }
+
+    .rating-dinner {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .rating-label {
+        font-size: 22px;
+        font-weight: 500;
+        margin-top: 10px;
+        font-weight: bold;
+        margin-right: 110px;
+    }
+
+    .comment-section {
+        display: flex;
+        flex-direction: column;  
+        font-weight: bold;  
+        text-align: left;
+    }
+
+    .label {
+        font-size: 20px;
+    }
+
+    .comment-section textarea {
+        width: 329px;
+        height: 250px;
+        border-radius: 10px;
+        border: 1px solid #EE5218;
+        font-size: 16px;
+    }
+
+    .logout-btn{
+        display: none;
+    }
+
+    .submit-btn {
+        bottom: 83px;
+        right: 239px;
+        background-color: #f04e23;
+        padding: 10px 20px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        width: 120px;
+        height: 45px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 411px) {
+    .mobile-navbar {
+        display: flex; 
+    }
+    
+    .sidebar {
+        position: fixed;
+        left: -240px;
+        top: 0;
+        width: 240px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 15px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-divider {
+        border: 0;
+        height: 2px; /* Slightly increased height */
+        background: linear-gradient(to right, transparent, #ffffff 50%, transparent); 
+        margin: 10px 0;
+        margin-bottom: 10px;
+      }
+
+    .brand {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: -30px; 
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .feedback-container {
+        position: relative; 
+        margin-top: 12px;  
+        width: 110%; 
+        max-width: 600px; 
+        height: 480px; 
+        padding: 20px;
+    }
+
+    .feedback-header {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center; 
+        text-align: center;
+        margin-bottom: 10px; 
+        margin-right: 105px;
+    }
+    
+    .feedback-date {
+        text-align: right;
+        width: 225px;
+        color: #f04e23;
+        margin-bottom: 10px;
+        font-size: 18px;
+        margin-left: 180px;
+    }
+    
+    .feedback-title {
+        width: 100%;
+        text-align: left;
+        font-size: 25px;
+    }
+    
+    .main-content {
+        padding: 50px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+    .main-content h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 45px;
+        padding-bottom: 5px;
+        margin-bottom: 0;
+    }
+
+    .rating-section {
+        flex-direction: column; 
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-bottom: 0px;
+        margin-top: 0;
+    }
+
+    .rating-snacks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 50px;
+        align-items: baseline;
+    }
+
+    span{
+        font-size: 20px;
+    }
+
+    .stars{
+        font-size: 30px;
+        color: orange;
+        cursor: pointer;
+        display: flex;
+        gap: 5px;
+    }
+
+    .stars .star{
+        font-size: 38px;
+    }
+
+    .rating-dinner {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .rating-label {
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 10px;
+        font-weight: bold;
+        margin-right: 115px;
+    }
+
+    .comment-section {
+        display: flex;
+        flex-direction: column;  
+        font-weight: bold;  
+        text-align: left;
+        padding-top: 0;
+    }
+
+    .label {
+        font-size: 20px;
+    }
+
+    .comment-section textarea {
+        width: 300px;
+        height: 130px;
+        border-radius: 10px;
+        border: 1px solid #EE5218;
+        font-size: 16px;
+    }
+
+    .logout-btn{
+        display: none;
+    }
+
+    .submit-btn {
+        bottom: 83px;
+        right: 239px;
+        background-color: #f04e23;
+        padding: 10px 20px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        width: 120px;
+        height: 45px;
+    }
+
+    .submit-btn-wrapper{
+        margin-top: 10px;
+    }
+}

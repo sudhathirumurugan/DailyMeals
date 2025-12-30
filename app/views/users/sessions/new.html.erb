@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <%= stylesheet_link_tag "Login", media: "all" %>
+</head>
+
+
+<body style="background-image: url('<%= asset_path('Food.jpg') %>'); background-repeat: no-repeat; background-position: center center; background-size: cover;">    
+    <div class="login-popup">
+        <p id="email-error"></p>
+        <p id="password-error"></p>
+    </div>
+    <div class="wrapper">
+        <div class="glass-box"></div>
+        <div class="container">
+            
+            <div id="flash-popup" class="flash-popup" >
+                <span id="flash-message"></span>
+            </div>
+            <div class="left-box">
+                <h2 class="brand">arieoMeals</h2>
+                <%= image_tag "chef.png", alt: "arieoMeals img", class: "transparent-img" %>
+            </div>
+            <div class="login-box">
+                <h2>Login</h2>
+                <%= form_with model: resource, url: session_path(resource_name), html: { id: "signin-form" } do |f| %>
+
+               
+                <label for="email">Email</label>
+                <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true, minlength: 6, maxlength: 30 %>
+
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                <%= f.password_field :password, id: "password", placeholder: "Enter your password", required: true, minlength: 8, maxlength: 30 %>
+                </div>
+
+                <div class="forgot-password">
+                    <%= link_to "Forgot Password?", new_password_path(resource_name) %>
+                </div>
+
+                <div class="actions">
+                    <%= f.submit "Sign in", class: "btn" %>
+                </div>
+                <% end %>
+                <p class="or-text">or</p>
+                <p class="register-text">Don't have an account yet? <%= link_to "Register Here", new_registration_path(resource_name) %></p>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("#signin-form");
+      if (!form) return;
+
+      const emailInput = document.querySelector("#email");
+      const passwordInput = document.querySelector("#password");
+      const emailError = document.querySelector("#email-error");
+      const passwordError = document.querySelector("#password-error");
+      const loginPopup = document.querySelector(".login-popup");
+
+      form.addEventListener("submit", function (event) {
+        let isValid = true;
+        loginPopup.style.display = "none"; 
+        loginPopup.style.opacity = "0"; 
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        if (!emailPattern.test(emailInput.value)) {
+            emailError.textContent = "Please enter a valid Gmail address.";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        if (!passwordPattern.test(passwordInput.value)) {
+            passwordError.textContent = "Password must include uppercase, lowercase, number, and special character.";
+            isValid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+
+        if (!isValid) {
+            loginPopup.style.display = "block"; 
+            setTimeout(() => {
+                loginPopup.style.opacity = "1"; 
+            }, 100);
+
+            setTimeout(() => {
+                let fadeEffect = setInterval(() => {
+                    if (loginPopup.style.opacity > "0") {
+                        loginPopup.style.opacity -= "0.1";
+                    } else {
+                        clearInterval(fadeEffect);
+                        loginPopup.style.display = "none"; 
+                    }
+                }, 100);
+            }, 4000); 
+
+            event.preventDefault(); 
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
+ 
+ 

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  comments_for_dinner: MyString
+  comments_for_snack: MyString
+  rating_for_dinner: 1.5
+  rating_for_snack: 1.5
+
+two:
+  user: two
+  comments_for_dinner: MyString
+  comments_for_snack: MyString
+  rating_for_dinner: 1.5
+  rating_for_snack: 1.5

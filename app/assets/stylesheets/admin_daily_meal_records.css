@@ -1,0 +1,882 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    overflow: hidden; /* Removes scroll */
+}
+
+.container {
+    display: flex;
+    margin: auto;
+    
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 300px;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Sidebar Logo */
+.sidebar .logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Sidebar buttons */
+.nav-btn {
+    display: block; /* Make list items behave like block buttons */
+    margin: 10px 0;
+    overflow: hidden;
+    background-color: black; /* Bootstrap primary color */
+    transition: background 0.3s ease;
+  }
+  
+  .nav-btn:hover {
+    background-color: rgb(194, 85, 6); /* Darker shade on hover */
+  }
+  
+  .btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%; /* Makes the link cover the full list item */
+    height: 100%;
+  }
+  
+  .btn-link i {
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  .nav-btn.active {
+    background-color: rgb(194, 85, 6); /* Change to your theme color */
+    color: white;
+    border-radius: 5px;
+}
+
+/* Sidebar Navigation */
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    align-items: center;
+}
+
+.sidebar nav ul li i {
+    margin-right: 10px;
+    color: orange;
+}
+
+.sidebar nav ul li:hover {
+    background-color: #b65026;
+}
+
+/* sidebar-divider */
+.sidebar-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #ccc 50%, transparent); 
+    margin: 10px 0;
+}
+
+
+/* Logout Button */
+/* Logout Button */
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: auto;  /* Push to bottom */
+    position: relative; /* Prevents overlap */
+    bottom: 30px; /* Moves it slightly up from the absolute bottom */
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+/* head */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+/* header-divider */
+.header-divider {
+    border: 0;
+    height: 2px; /* Slightly increased height */
+    background: linear-gradient(to right, transparent, #000000 50%, transparent); 
+    margin: 10px 0;
+    position: relative;
+    z-index: 1; /* Ensures it stays above background but below header content */
+}
+
+.header h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Date Picker Section */
+.date {
+    display: flex;
+    align-items: center;
+}
+
+.date span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 15px;
+    color: #f04e23;
+}
+
+.date-form {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.date-picker {
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.calendar-icon i {
+    font-size: 20px;
+    color: #f04e23;
+    cursor: pointer;
+    padding-bottom: 5px;
+}
+
+/* Table Styling */
+.table-container {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
+    padding-bottom: 2px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background: black;
+    color: white;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #000000;
+}
+
+th {
+    font-size: 18px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Rounded Borders for Table */
+.table-container table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-container table thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table-container table thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table-container table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table-container table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+/* Download Button - Positioned at Bottom Right */
+.download-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid #f04e23;
+    color: black;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.download-btn:hover {
+    background-color: #f04e23;
+    color: white;
+}
+
+.download-btn i {
+    margin-right: 5px;
+}
+
+
+
+/* table toggle css */
+
+.hidden {
+    display: none;
+}
+
+.meal-filter {
+
+    width: 100px;
+    height: 30px;
+    margin-left: 430px;
+    font-size: 16px;
+    text-align: center; /* Center text for most browsers */
+    text-align-last: center;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid #f04e23;
+    color: black;
+    border-radius: 5px;
+}
+    
+.meal-filter::-webkit-focus-ring-color {
+    color: #f04e23 !important;
+}
+.table-container table {
+    width: 100%;
+}
+
+.table-container th, .table-container td {
+    border: 0.5px solid #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: black;
+    color: white;
+}
+
+
+/* empty records */
+.no-records{
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: #000000;
+    padding-top: 40px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* total count */
+
+.meal-counts {
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.meal-counts h3 {
+    margin-bottom: 5px;
+    color: #333;
+    padding-top: 5px;
+}
+
+.meal-summary {
+    display: flex;
+    gap: 20px; /* Space between items */
+    flex-wrap: wrap; /* Wrap to new line if needed */
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+.meal-summary span {
+    background-color: #eaeaea; /* Light gray background */
+    padding: 9px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.flash-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Smooth fade-out */
+  }
+  
+  .notice, .alert {
+    display: none;
+  }
+
+  /* flatpickr-calendar */
+  .flatpickr-calendar {
+    font-size: 14px; /* Adjust size */
+    width: 305px; /* Reduce width */
+    max-width: 100%; /* Ensure responsiveness */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Adjust positioning */
+.flatpickr-calendar.open {
+    position: absolute !important;
+    top: 70px !important; /* Adjust based on icon */
+    right: 20px !important;
+    left: auto !important;
+    z-index: 9999;
+}
+
+.flatpickr-months .flatpickr-month{
+    background: #f04e23;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.flatpickr-calendar.arrowTop:before,
+.flatpickr-calendar.arrowTop:after {
+    display: none !important;
+}
+
+
+
+  /* mobile responsive */
+  
+.mobile-navbar {
+    display: none;
+}
+
+.close-btn {
+    display: none;
+}
+
+.logout-btn-mobile {
+    display: none;
+}
+
+/* Mobile Screen (up to 768px) */
+@media (min-width: 412px) and (max-width: 768px) {
+    .mobile-navbar {
+        display: flex; 
+    }
+
+    .logout-btn{
+        display: none;
+    }
+    
+    .sidebar { 
+        position: fixed;
+        left: -250px; 
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 20px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0; 
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        color: white;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-top: 55px; 
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .mobile-navbar {
+        width: 100%;
+        height: 70px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .meal-filter {
+    width: 105px;
+    height: 40px;
+    font-size: 18px;
+    /* justify-content: center; */
+    background-color: white;
+    border: 2px solid #f04e23;
+    color: black;
+    border-radius: 10px;
+    margin-left: -195px;
+    margin-top: 15px;
+    }
+    
+    .date-form{
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+    } 
+
+    .header h2 {
+        padding-top: 5px;
+        display: flex;
+        align-self: flex-start;
+        padding-left: 15px;
+    }
+    
+    .date {
+        margin-top: -35px;
+        margin-right: -120px;
+    }
+    
+    .date span {
+        font-size: 18px;
+        font-weight: bold;
+        color: #f04e23;
+        white-space: nowrap; /* Prevents text wrapping */
+        margin-right: 0;
+        margin-left: 0;
+    }
+    
+    .calendar-icon {
+        font-size: 22px; /* Increases size */
+        color: #f04e23; /* Sets the color to orange */
+        flex-shrink: 0; /* Prevents shrinking */
+        cursor: pointer; /* Makes it clickable */
+    }
+
+    .calendar-icon i {
+        font-size: 20px;
+        color: #f04e23;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .table-container {
+        background: white;
+        padding: 11px;
+        margin-top: 10px;
+        border-radius: 20px;
+        width: 420px;
+        height: 700px;
+        overflow: scroll;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .download-btn {
+        width: 148px;
+        height: 57px;
+        top: 820px;
+        left: 250px;
+        border-radius: 10px;
+        border: 4px solid #EE5218;
+        background: #FFF;
+    }
+
+    th {
+        font-size: 16px;
+    }
+
+    td {
+        font-size: 15px;
+    }
+
+    .table-container table thead tr:first-child th:first-child {
+        border-top-left-radius: 10px;
+        padding: 21px 41px;
+    }
+
+    .table-container table thead tr:first-child th:last-child {
+        border-top-right-radius: 10px;
+        /* padding: 21px 41px; */
+    }
+    .header-divider{
+        display: none;
+    }
+
+    /* flatpickr-calendar */
+  .flatpickr-calendar {
+    font-size: 14px; /* Adjust size */
+    width: 305px; /* Reduce width */
+    max-width: 100%; /* Ensure responsiveness */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Adjust positioning */
+.flatpickr-calendar.open {
+    position: absolute !important;
+    top: 175px !important; /* Adjust based on icon */
+    right: 10px !important;
+    left: auto !important;
+    z-index: 9999;
+    width: auto;
+}
+}
+
+@media (min-width: 375px) and (max-width: 411px) {
+    .mobile-navbar {
+        display: flex;
+        width: 100%;
+        height: 65px;
+        background: #000;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .mobile-navbar button {
+        background: #f04e23;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .mobile-navbar button i {
+        color: white;
+        font-size: 20px;
+    }
+
+    .logout-btn {
+        display: none;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -240px;
+        top: 0;
+        width: 240px;
+        height: 100%;
+        background: black;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 15px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #f04e23;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle {
+        background: #f04e23;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle i {
+        color: white;
+        font-size: 18px;
+    }
+
+    .main-content {
+        margin-top: 50px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .meal-filter {
+        width: 100px;
+        height: 35px;
+        font-size: 16px;
+        background-color: white;
+        border: 2px solid #f04e23;
+        color: black;
+        border-radius: 8px;
+        margin-left: -175px;
+        margin-top: 10px;
+    }
+
+    .date-form {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .header h2 {
+        padding-top: 5px;
+        align-self: flex-start;
+        padding-left: 10px;
+    }
+
+    .date {
+        margin-top: -30px;
+        margin-right: -100px;
+    }
+
+    .date span {
+        font-size: 16px;
+        font-weight: bold;
+        color: #f04e23;
+        white-space: nowrap;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .calendar-icon {
+        font-size: 20px;
+        color: #f04e23;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    .calendar-icon i {
+        font-size: 18px;
+        color: #f04e23;
+        cursor: pointer;
+        margin-right: 8px;
+    }
+
+    .table-container {
+        background: white;
+        padding: 10px;
+        margin-top: 7px;
+        border-radius: 15px;
+        width: 364px;
+        height: 482px;
+        overflow: scroll;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .download-btn {
+        width: 120px;
+        height: 45px;
+        border-radius: 8px;
+        border: 3px solid #EE5218;
+        background: #FFF;
+        font-size: 14px;
+    }
+
+    th {
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .table-container table thead tr:first-child th:first-child {
+        border-top-left-radius: 8px;
+        padding: 18px 35px;
+    }
+
+    .table-container table thead tr:first-child th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+    .header-divider {
+        display: none;
+    }
+
+    /* Flatpickr Calendar */
+    .flatpickr-calendar {
+        font-size: 13px;
+        width: 280px;
+        max-width: 100%;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+
+    /* Adjust positioning */
+    .flatpickr-calendar.open {
+        position: absolute !important;
+        top: 160px !important;
+        right: 10px !important;
+        left: auto !important;
+        z-index: 9999;
+        width: auto;
+    }
+}

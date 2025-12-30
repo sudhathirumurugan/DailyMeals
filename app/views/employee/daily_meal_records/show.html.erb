@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meal Record</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag "user_meal_card" %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+<div class="mobile-navbar">
+<button class="menu-toggle">
+        <i class="fas fa-bars"></i> 
+</button>
+<%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+    <i class="fas fa-sign-out-alt"></i>
+<% end %>
+</div>
+<div class="container">
+    <%= render 'shared/employee/sidebar' %>
+    <div id="flash-popup" class="flash-popup" style="display: none;">
+      <span id="flash-message"></span>
+    </div>
+    <div class="meal-card">
+        <h2>Your Meal Selection for <%= @daily_meal_record.date.strftime('%d-%m-%Y') %></h2>
+        <hr class="header-divider">
+        <div class= "first-p">
+        </div>
+
+        <div class="card">
+            <p><strong>Date:</strong> <%= Date.today.strftime('%d-%m-%Y') %></p>
+            <p><strong>Snack:</strong> <%= @daily_meal_record.snack ? "Yes" : "No" %></p>
+            <p><strong>Dinner:</strong> <%= @daily_meal_record.dinner ? "Yes" : "No" %></p>
+            <p><strong>Chapati Count:</strong> <%= @daily_meal_record.chapati_count.present? ? @daily_meal_record.chapati_count : "N/A" %></p>
+            
+            <% if @meal_preference_enabled && @daily_meal_record.date == Date.today %>
+                <p><strong>Meal Type:</strong> 
+                    <%= case @daily_meal_record.meal_type
+                        when 1 then "Veg"
+                        when 2 then "Non-Veg"
+                        else "Not Specified!"
+                    end %>
+                </p>
+            <% end %>
+            
+            <div class="card-buttons">
+                <%= link_to "Edit", edit_employee_daily_meal_record_path(@daily_meal_record), class: "edit-btn" %>
+                <%= button_to "Delete", employee_daily_meal_record_path(@daily_meal_record), 
+                    method: :delete, 
+                    class: "delete-btn", 
+                    data: { turbo: "false" }, 
+                    onclick: "return confirm('Are you sure you want to delete this book?');"
+                %>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+//   document.addEventListener("DOMContentLoaded", function () {
+//     let welcomePopup = document.getElementById("welcome-msg");
+//     if (welcomePopup && welcomePopup.innerText.trim() !== "") {
+//       welcomePopup.style.display = "block";
+
+//       // Auto-hide after 3 seconds
+//       setTimeout(() => {
+//         welcomePopup.style.display = "none";
+//       }, 3000);
+//     }
+//   });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Sidebar toggle functionality
+    const menuToggle = document.querySelector(".menu-toggle");
+    const closeBtn = document.querySelector(".close-btn");
+    const sidebar = document.querySelector(".sidebar");
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("active"); // Show/hide sidebar
+        });
+    }
+
+    if (closeBtn && sidebar) {
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active"); // Hide sidebar
+        });
+    }
+});
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,455 @@
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: #f8f8f8;
+}
+
+/* Container Layout */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 300px;
+  background-color: black;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* sidebar-divider */
+.sidebar-divider {
+  border: 0;
+  height: 2px; /* Slightly increased height */
+  background: linear-gradient(to right, transparent, #ccc 50%, transparent); 
+  margin: 10px 0;
+}
+
+/* Sidebar Logo */
+.sidebar .logo {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+/* Sidebar buttons */
+.nav-btn {
+display: block; /* Make list items behave like block buttons */
+margin: 10px 0;
+overflow: hidden;
+background-color: black; /* Bootstrap primary color */
+transition: background 0.3s ease;
+}
+
+.nav-btn:hover {
+background-color: rgb(194, 85, 6); /* Darker shade on hover */
+}
+
+.btn-link {
+display: flex;
+align-items: center;
+justify-content: left;
+text-decoration: none;
+color: white;
+padding: 12px 20px;
+font-size: 16px;
+font-weight: bold;
+width: 100%; /* Makes the link cover the full list item */
+height: 100%;
+}
+
+.btn-link i {
+margin-right: 8px; /* Space between icon and text */
+}
+
+.nav-btn.active {
+background-color: rgb(194, 85, 6); /* Change to your theme color */
+color: white;
+border-radius: 5px;
+}
+
+/* Sidebar Navigation */
+.sidebar nav {
+  flex-grow: 1;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+}
+
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  align-items: center;
+}
+
+.sidebar nav ul li i {
+  margin-right: 10px;
+  color: orange;
+}
+
+.sidebar nav ul li:hover {
+  background-color: #b65026;
+}
+
+/* Logout Button */
+/* Logout Button */
+.logout-btn {
+background-color: #ff5722;
+color: white;
+padding: 10px;
+text-align: center;
+border: none;
+cursor: pointer;
+font-size: 16px;
+border-radius: 5px;
+width: 250px;
+margin-left: 20px;
+margin-top: auto;  /* Push to bottom */
+position: relative; /* Prevents overlap */
+bottom: 30px; /* Moves it slightly up from the absolute bottom */
+}
+
+.logout-btn:hover {
+background-color: #e64a19;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  padding-top: 30px;
+  overflow: hidden;
+}
+
+.header{
+  padding-bottom: 15px;
+}
+
+/* header-divider */
+.header-divider {
+  border: 0;
+  height: 2px; /* Slightly increased height */
+  background: linear-gradient(to right, transparent, #000000 50%, transparent); 
+  margin: 10px 0;
+  position: relative;
+  z-index: 1; /* Ensures it stays above background but below header content */
+}
+
+/* Top Right Date - Inside Main Content */
+.selected-date {
+position: absolute;
+top: 35px;
+right: 25px;
+font-size: 18px;
+font-weight: bold;
+color: #f04e23; /* Adjust if needed */
+}
+
+/* Heading */
+h2 {
+  font-size: 26px;
+  margin: 0;
+}
+
+/* Select Date Label */
+.date-label {
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 5px;
+display: block;
+color: #333; /* Adjust if needed */
+}
+
+/* Date Input */
+.date-picker {
+width: 87px;
+padding: 8px;
+font-size: 16px;
+border: 2px solid #e75b1e;
+border-radius: 5px;
+outline: none;
+cursor: pointer;
+height: 15px;
+}
+
+/* Meal Preferences Title */
+.meal-title {
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 20px;
+color: #333; /* Adjust as needed */
+}
+
+/* Meal Preference Options */
+
+
+.meal-options label {
+font-size: 16px;
+}
+
+.save-settings-btn {
+  width: 155px; /* Adjust width */
+  height: 45px;
+  background-color: #f04e23; /* Button color */
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px; /* Adjust font size */
+  font-weight: bold;
+  border: none; /* Removes black border */
+  outline: none; /* Prevents focus outline */
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap; /* Prevents text from wrapping */
+  cursor: pointer; /* Changes cursor to pointer */
+  transition: 0.3s ease-in-out;
+}
+
+.save-settings-btn:hover {
+  background-color: #f04e23;
+  color: white;
+}
+
+
+.mobile-navbar {
+display: none;
+}
+
+.close-btn {
+display: none;
+}
+
+.logout-btn-mobile {
+display: none;
+}
+
+.space{
+  padding-top: 10px;
+}
+
+.form-group-select-date{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.form-group {
+  font-size: 14px;
+  display: flex;
+  gap: 20px;
+  margin: 10px 0;
+  padding-top: 15px;
+  }
+  
+  label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  }
+
+  /* flatpickr-calendar */
+  .flatpickr-calendar {
+    font-size: 14px; /* Adjust size */
+    width: 305px; /* Reduce width */
+    max-width: 100%; /* Ensure responsiveness */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Adjust positioning */
+.flatpickr-calendar.open {
+    position: absolute !important;
+    top: 90px !important; /* Adjust based on icon */
+    left: 640px !important;
+    z-index: 9999;
+}
+
+.flatpickr-months .flatpickr-month {
+  background: #f04e23;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.calendar-icon i {
+  font-size: 20px;
+  color: #f04e23;
+  cursor: pointer;
+  padding-bottom: 0px;
+  padding-top: 10px;
+}
+
+/* Mobile Screen (up to 768px) */
+@media screen and (max-width: 768px) {
+.logout-btn {
+  display: none;
+}
+
+/* .mobile-navbar {
+display: flex; 
+} */
+
+.sidebar { 
+position: fixed;
+left: -250px; 
+top: 0;
+width: 250px;
+height: 100%;
+background: #333;
+transition: left 0.3s ease-in-out;
+z-index: 1000;
+/* padding: 20px; */
+}
+
+.sidebar.active {
+left: 0; 
+}
+
+.logo {
+font-size: 30px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 20px;
+margin-top: 30px;
+padding-bottom: 10px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.close-btn {
+position: absolute;
+top: 10px;
+right: 10px;
+background: #f04e23;
+border: none;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+color: white;
+font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+
+.menu-toggle {
+background: #f04e23;
+border: none;
+width: 45px;
+height: 45px;
+border-radius: 80%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+
+.menu-toggle i {
+color: white;
+font-size: 20px;
+}
+
+.main-content {
+  padding-top: 90px;
+}
+
+.mobile-navbar {
+width: 100%;
+height: 70px;
+background: #000;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 10px; /* Reduced padding to avoid overflowing */
+position: fixed;
+top: 0;
+left: 0;
+z-index: 1000;
+box-sizing: border-box; /* Ensures padding doesn’t push content */
+}
+
+.mobile-navbar button {
+background: #f04e23;
+border: none;
+width: 45px;
+height: 45px;
+border-radius: 50%; /* Ensures a perfect circle */
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+margin: 0 5px; /* Adds some spacing to prevent overflow */
+}
+
+.mobile-navbar button i {
+color: white;
+font-size: 20px;
+}
+
+.selected-date {
+position: absolute;
+top: 100px;
+right: 23px;
+font-size: 16px;
+font-weight: bold;
+color: #f04e23; /* Adjust if needed */
+}
+
+.save-settings-btn {
+width: 155px; /* Adjust width */
+height: 45px;
+background-color: #f04e23; /* Button color */
+padding: 10px 20px;
+color: white;
+font-size: 18px; /* Adjust font size */
+font-weight: bold;
+border: none; /* Removes black border */
+outline: none; /* Prevents focus outline */
+border-radius: 5px;
+text-align: center;
+white-space: nowrap; /* Prevents text from wrapping */
+cursor: pointer; /* Changes cursor to pointer */
+}
+
+.flatpickr-calendar {
+  font-size: 13px;
+  width: 280px;
+  max-width: 100%;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+/* Adjust positioning */
+.flatpickr-calendar.open {
+  position: absolute !important;
+  top: 160px !important;
+  right: 10px !important;
+  left: auto !important;
+  z-index: 9999;
+  width: auto;
+}
+
+.space{
+  padding-top: 10px;
+}
+}

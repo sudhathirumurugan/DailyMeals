@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Meal Selection</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag "UserMeal", media:"all" %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+<div class="mobile-navbar">
+<button class="menu-toggle">
+        <i class="fas fa-bars"></i> 
+</button>
+<%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+    <i class="fas fa-sign-out-alt"></i>
+<% end %>
+</div>
+    <div class="container">
+        <%= render 'shared/employee/sidebar' %>
+    </div>
+
+    <div id="flash-popup" class="flash-popup" style="display: none;">
+      <span id="flash-message"></span>
+    </div>
+    <div class="main-content">
+        <h2>Edit Your Meal Selection for <%= @daily_meal_record.date.strftime('%d-%m-%Y') %></h2>
+        <hr class="header-divider">
+        
+        
+        <%= render 'shared/employee/edit_form', daily_meal_record: @daily_meal_record %>
+        
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dinnerSelection = document.getElementById("dinner-selection");
+            const chapatiContainer = document.getElementById("chapati-container");
+            const chapatiSelect = document.getElementById("chapati-count");
+
+            function toggleChapatiField() {
+                if (dinnerSelection.value === "true") {
+                    chapatiContainer.classList.add("active");
+                    chapatiSelect.removeAttribute("disabled");
+                } else {
+                    chapatiContainer.classList.remove("active");
+                    chapatiSelect.setAttribute("disabled", "true");
+                }
+            }
+
+            if (dinnerSelection) {
+                toggleChapatiField();
+                dinnerSelection.addEventListener("change", toggleChapatiField);
+            }
+
+            const menuToggle = document.querySelector(".menu-toggle");
+        const closeBtn = document.querySelector(".close-btn");
+        const sidebar = document.querySelector(".sidebar");
+    
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active"); 
+            });
+        }
+    
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener("click", function () {
+                sidebar.classList.remove("active"); 
+            });
+        }
+        });
+    </script>
+
+</body>
+</html>

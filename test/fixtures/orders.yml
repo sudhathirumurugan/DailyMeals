@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_snacks: 1
+  total_dinners: 1
+  total_chapatis: 1
+
+two:
+  total_snacks: 1
+  total_dinners: 1
+  total_chapatis: 1

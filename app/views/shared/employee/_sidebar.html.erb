@@ -1,0 +1,27 @@
+<aside class="sidebar">
+    <button class="close-btn">
+        <i class="fas fa-times"></i>
+    </button>
+    <h2 class="logo">arieoMeals</h2>
+    <hr class="sidebar-divider">
+        <nav>
+            <ul>
+            <li class="<%= 'active' if current_page?(new_employee_daily_meal_record_path) || 
+            (defined?(@daily_meal_record) && @daily_meal_record.present? && current_page?(employee_daily_meal_record_path(@daily_meal_record))) || 
+            (defined?(@daily_meal_record) && @daily_meal_record.present? && current_page?(edit_employee_daily_meal_record_path(@daily_meal_record))) %> nav-btn">          
+                <%= link_to new_employee_daily_meal_record_path, class: "btn-link" do %>
+                    <i class="fas fa-utensils"></i> Daily Meals
+                    <% end %>
+                </li>
+                <li class="<%= 'active' if current_page?(new_employee_feedback_path) %> nav-btn">
+                    <%= link_to new_employee_feedback_path, class: "btn-link" do %>
+                        <i class="fas fa-comment-dots"></i> Feedback
+                    <% end %>
+                </li>
+            </ul>
+        </nav>
+        <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
+            <i class="fas fa-sign-out-alt"></i> Logout
+        <% end %>
+</aside>
+

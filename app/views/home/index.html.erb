@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meals Records</title>
+    
+    <%= stylesheet_link_tag "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" %>
+    <%= stylesheet_link_tag "admin_daily_meal_records" %>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+        <h2 class="logo">arieoMeals</h2>
+        <hr class="sidebar-divider">
+        <nav>
+            <ul>
+                <li class="<%= 'active' if current_page?(new_employee_daily_meal_record_path) || 
+            (defined?(@daily_meal_record) && @daily_meal_record.present? && current_page?(employee_daily_meal_record_path(@daily_meal_record))) || 
+            (defined?(@daily_meal_record) && @daily_meal_record.present? && current_page?(edit_employee_daily_meal_record_path(@daily_meal_record))) %> nav-btn">          
+                <%= link_to new_employee_daily_meal_record_path, class: "btn-link" do %>
+                    <i class="fas fa-utensils"></i> Daily Meals
+                    <% end %>
+                </li>
+                <% if current_user.type == 'Admin' %>
+                    <li class="<%= 'active' if current_page?(admin_daily_meal_records_path) %> nav-btn">
+                        <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
+                        <i class="fas fa-utensils"></i> Daily Meals Records
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
+        </nav>
+        <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
+            <i class="fas fa-sign-out-alt"></i> Logout
+          <% end %>
+          
+        </aside>
+
+        <main class="main-content">
+          <div id="flash-popup" class="flash-popup" style="display: none;">
+            <span id="flash-message"></span>
+          </div>
+            <header class="header">
+            
+                <h2>Welcome To arieoMeals</h2>
+            </header>
+        </main>
+    </div>
+    
+   
+</body>
+</html>

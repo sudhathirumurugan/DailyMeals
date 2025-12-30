@@ -1,0 +1,37 @@
+<%= form_with model: daily_meal_record, url: employee_daily_meal_records_path, method: :post, local: true do |f| %>
+    <div class="meal-container">
+        <div class="meal-selection">
+            <div class="meal-item">
+                <%= f.label :snack, "Snack" %>
+                <%= f.select :snack, options_for_select([["Select", false], ["Yes", true], ["No", false]], daily_meal_record.snack), {}, { class: "form-control" } %>
+            </div>
+            <div class="meal-item">
+                <%= f.label :dinner, "Dinner" %>
+                <%= f.select :dinner, options_for_select([["Select", false], ["Yes", true], ["No", false]], daily_meal_record.dinner), {}, { id: "dinner-selection", class: "form-control" } %>
+            </div>
+
+            <div class="meal-item-chapati-count" id="chapati-container">
+                <%= f.label :chapati_count, "Number of Chapatis" %>
+                <%= f.select :chapati_count, options_for_select([["Select", 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]], daily_meal_record.chapati_count), {}, { id: "chapati-count", class: "form-control", disabled: true } %>
+            </div>
+        </div>  
+
+        <div>
+        <% if @meal_preference_enabled %>
+            <div class="meal-item-meal-type">
+                <%= f.label :meal_type, "Meal Type" %>
+                <%= f.select :meal_type, [["Select", 0], ['Veg', 1], ['Non-Veg', 2]], { class: "form-control" } %>
+                
+            </div>
+        <% else %>
+            <!-- If veg/non-veg is disabled, set meal_type to 0 (veg) -->
+            <%= f.hidden_field :meal_type, value: 0 %>
+        <% end %>
+        </div>
+
+        <!-- Submit Button Inside Meal Container -->
+        <div class="submit-btn-wrapper">
+            <%= f.submit "Submit", class: "submit-btn btn btn-primary" %>
+        </div>
+    </div>
+<% end %>

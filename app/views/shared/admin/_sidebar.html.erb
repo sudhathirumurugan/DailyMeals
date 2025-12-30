@@ -1,0 +1,35 @@
+<div class="sidebar">
+    <button class="close-btn">
+        <i class="fas fa-times"></i>
+    </button>
+    <h2 class="logo">arieoMeals</h2>
+    <hr class="sidebar-divider">
+        <nav>
+            <ul>
+                <li class="<%= 'active' if current_page?(rails_admin_path) %> nav-btn" >
+                    <%= link_to rails_admin_path, class: "btn-link" do %>
+                        <i class="fas fa-user-tie"></i> Admin Dashboard
+                    <% end %>
+                </li>
+                <li class="<%= 'active' if current_page?(admin_daily_meal_records_path) %> nav-btn">
+                    <%= link_to admin_daily_meal_records_path, class: "btn-link" do %>
+                    <i class="fas fa-utensils"></i> Daily Meals Records
+                    <% end %>
+                </li>
+                <li class="<%= 'active' if current_page?(admin_feedbacks_path) %> nav-btn">
+                    <%= link_to admin_feedbacks_path, class: "btn-link" do %>
+                        <i class="fas fa-comment-dots"></i> Feedback
+                    <% end %>
+                </li>
+                <li class="<%= 'active' if current_page?(admin_meal_preference_settings_path) %> nav-btn" >
+                    <%= link_to admin_meal_preference_settings_path, class: "btn-link" do %>
+                        <i class="fas fa-cog settings-icon"></i> Settings
+                    <% end %>
+                </li>
+            </ul>
+        </nav>
+        <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn" do %>
+            <i class="fas fa-sign-out-alt"></i> Logout
+          <% end %>
+          
+</div>

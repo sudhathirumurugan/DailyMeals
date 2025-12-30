@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meals - arieoMeals</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag "UserMeal" %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+<div class="mobile-navbar">
+<button class="menu-toggle">
+        <i class="fas fa-bars"></i> 
+</button>
+<%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-mobile" do %>
+    <i class="fas fa-sign-out-alt"></i>
+<% end %>
+</div>
+    <div class="container">
+        <%= render 'shared/employee/sidebar' %>
+    </div>
+ 
+    <div id="flash-popup" class="flash-popup" style="display: none;">
+      <span id="flash-message"></span>
+    </div>
+    <div class="main-content">
+        <h2>Select your availability</h2>
+        <hr class="header-divider">
+
+        <p class="notice" style="color: green;"><%= notice %></p>
+        <p class="alert" style="color: red;"><%= alert %></p>
+ 
+       
+ 
+        <% if @daily_meal_record.persisted? %>
+            <!-- Render Show View -->
+            <%= render 'shared/employee/show', daily_meal_record: @daily_meal_record %>
+        <% else %>
+            <!-- Render Form for New Meal Record -->
+            
+            <%= render 'shared/employee/form', daily_meal_record: @daily_meal_record %>
+ 
+        <% end %>
+    </div>
+ 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dinnerSelection = document.getElementById("dinner-selection");
+            const chapatiContainer = document.getElementById("chapati-container");
+            const chapatiSelect = document.getElementById("chapati-count");
+ 
+            function toggleChapatiField() {
+                if (dinnerSelection.value === "true") {
+                    chapatiContainer.classList.add("active"); // Apply CSS class
+                    chapatiSelect.removeAttribute("disabled"); // Enable selection
+                } else {
+                    chapatiContainer.classList.remove("active"); // Hide again
+                    chapatiSelect.setAttribute("disabled", "true"); // Disable selection
+                }
+            }
+ 
+            if (dinnerSelection) {
+                toggleChapatiField();
+                dinnerSelection.addEventListener("change", toggleChapatiField);
+            }
+
+            const menuToggle = document.querySelector(".menu-toggle");
+        const closeBtn = document.querySelector(".close-btn");
+        const sidebar = document.querySelector(".sidebar");
+    
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active"); 
+            });
+        }
+    
+        if (closeBtn && sidebar) {
+            closeBtn.addEventListener("click", function () {
+                sidebar.classList.remove("active"); 
+            });
+        }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - arieoMeals</title>
+     <%= stylesheet_link_tag "reset_password", media: "all" %>
+    
+</head>
+<body style="background: url('<%= asset_path('Food.jpg') %>') no-repeat center center/cover;">
+    <div class="forget-password">
+      <p id="emailForget-error"></p>
+      <p id="passwordForget-error"></p>
+      <p id="passwordForget-confirm-error"></p>
+    </div>
+    <div class="wrapper">
+        <div class="glass-box"></div>
+        <div class="container">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <div id="flash-popup" class="flash-popup" style="display: none;">
+                <span id="flash-message"></span>
+            </div>
+            
+            <div class="left-box">
+                <h2 class="brand">arieoMeals</h2>
+                <%= image_tag "chef.png", alt: "arieoMeals img", class: "transparent-img" %>
+            </div>
+            <div class="reset-box">
+                <h2>Reset Password</h2>
+
+                <%= form_with model: resource, url: password_path(resource_name), html: { method: :put, id: "forget-password-form"} do |f| %>
+                    <%= render "users/shared/error_messages", resource: resource %>
+                    <%= f.hidden_field :reset_password_token %>
+
+                    <label for="email">Email</label>
+                    <%= f.email_field :email, id: "email", placeholder: "Enter your email", required: true, minlength: 6, maxlength: 30  %>
+
+                    <label for="new-password">New Password</label>
+                    <div class="password-wrapper">
+                        <%= f.password_field :password, id: "new-password", placeholder: "Enter your password", required: true, autocomplete: "new-password", minlength: 8, maxlength: 30  %>
+                        <button type="button" class="toggle-password" onclick="togglePassword('new-password')">
+                            👁️‍🗨️
+                        </button>
+                    </div>
+
+                    <label for="confirm-password">Re-Enter Password</label>
+                    <div class="password-wrapper">
+                        <%= f.password_field :password_confirmation, id: "confirm-password", placeholder: "Confirm your password", required: true, autocomplete: "new-password", minlength: 8, maxlength: 30 %>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">
+                            👁️‍🗨️
+                        </button>
+                    </div>
+
+                    <button type="submit" class="btn">Reset</button>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form3 = document.querySelector("#forget-password-form");
+        if (!form3) return;
+
+        const emailInput3 = document.querySelector("#email");
+        const passwordInput3 = document.querySelector("#new-password");
+        const confirmPasswordInput3 = document.querySelector("#confirm-password");
+
+        const emailError3 = document.querySelector("#emailForget-error");
+        const passwordError3 = document.querySelector("#passwordForget-error");
+        const confirmPasswordError3 = document.querySelector("#passwordForget-confirm-error");
+
+        const forgetPasswordPopup = document.querySelector(".forget-password");
+
+        form3.addEventListener("submit", function (event) {
+            let isValid = true;
+
+            forgetPasswordPopup.style.display = "none";
+            forgetPasswordPopup.style.opacity = "0";
+
+            const emailPattern3 = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!emailPattern3.test(emailInput3.value.trim())) {
+                emailError3.textContent = "Please enter a valid Gmail address.";
+                isValid = false;
+            }
+
+            const passwordPattern3 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordPattern3.test(passwordInput3.value.trim())) {
+                passwordError3.textContent = "Password must have uppercase, lowercase, number, and special character.";
+                isValid = false;
+            }
+
+            if (confirmPasswordInput3.value.trim() !== passwordInput3.value.trim()) {
+                confirmPasswordError3.textContent = "Passwords do not match!";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                forgetPasswordPopup.style.display = "block";
+                setTimeout(() => {
+                    forgetPasswordPopup.style.opacity = "1";
+                }, 100);
+
+                setTimeout(() => {
+                    let opacityValue = 1.0;
+                    let fadeEffect = setInterval(() => {
+                        if (opacityValue > 0) {
+                            opacityValue -= 0.1;
+                            forgetPasswordPopup.style.opacity = opacityValue.toString();
+                        } else {
+                            clearInterval(fadeEffect);
+                            forgetPasswordPopup.style.display = "none";
+                        }
+                    }, 100);
+                }, 4000); 
+
+                event.preventDefault(); 
+              }
+            });
+        });
+
+      function togglePassword(fieldId) {
+        let passwordField = document.getElementById(fieldId);
+        passwordField.type = passwordField.type === "password" ? "text" : "password";
+      }
+    </script>
+</body>
+</html>
