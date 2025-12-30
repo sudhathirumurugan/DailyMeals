@@ -37,3 +37,17 @@
 !/app/assets/builds/.keep
 
 /node_modules
+# Ignore OS and editor files
+.DS_Store
+.byebug_history
+
+# Ignore cache files
+*.cache
+
+# Ignore sample/template files
+*.sample
+
+# Ignore log files (beyond /log directory)
+*.log
+.ruby-version
+.gitattributes
